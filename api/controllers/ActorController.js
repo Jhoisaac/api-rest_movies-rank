@@ -31,6 +31,8 @@ module.exports = {
     }
     Actor.find()
       .then( (_actores) => {
+        console.log('Consultado actores');
+        console.dir(_actores);
         if (!_actores || _actores.length === 0) return res.badRequest({ err: 'No hay actores registrados :(' });
         return res.ok(_actores);
       }).catch( (err) => {
