@@ -72,10 +72,10 @@ module.exports.routes = {
   'PUT /api/director/:id': 'DirectorController.update',
 
   //pelicula
-  'GET /api/clientes': 'PeliculaController.findAll',
-  'GET /api/cliente/:id': 'PeliculaController.findOne',
+  'GET /api/peliculas': 'PeliculaController.findAll',
+  'GET /api/pelicula/:id': 'PeliculaController.findOne',
 
   //popularidad
-  'GET /api/usuarios': 'PopularidadController.findAll',
-  'GET /api/usuario/:id': 'PopularidadController.findOne'
+  'GET /api/popularidades': 'PopularidadController.findAll',
+  'GET /api/popularidad/:id': 'PopularidadController.findOne'
 };
