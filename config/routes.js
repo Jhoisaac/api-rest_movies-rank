@@ -47,44 +47,35 @@ module.exports.routes = {
   ***************************************************************************/
 
   //actor
-  'POST /api/categoria': 'CategoriaController.create',
-  'GET /api/categorias': 'CategoriaController.findAll',
-  'GET /api/categoria/:id': 'CategoriaController.findOne',
-  'DELETE /api/categoria/:id': 'CategoriaController.delete',
-  'PUT /api/categoria/:id': 'CategoriaController.update',
+  'POST /api/actor': 'ActorController.create',
+  'GET /api/actores': 'ActorController.findAll',
+  'GET /api/actor/:id': 'ActorController.findOne',
+  'DELETE /api/actor/:id': 'ActorController.delete',
+  'PUT /api/actor/:id': 'ActorController.update',
 
   //comentario
-  'POST /api/producto': 'ProductoController.create',
-  'GET /api/productos': 'ProductoController.findAll',
-  'GET /api/producto/:id': 'ProductoController.findOne',
-  'DELETE /api/producto/:id': 'ProductoController.delete',
-  'PUT /api/producto/:id': 'ProductoController.update',
+  'POST /api/comentario': 'ComentarioController.create',
+  'GET /api/comentarios': 'ComentarioController.findAll',
+  'GET /api/comentario/:id': 'ComentarioController.findOne',
+  'DELETE /api/comentario/:id': 'ComentarioController.delete',
+  'PUT /api/comentario/:id': 'ComentarioController.update',
 
   //company
-  'POST /api/tipo': 'TipoController.create',
-  'GET /api/tipos': 'TipoController.findAll',
-  'GET /api/tipo/:id': 'TipoController.findOne',
-  'DELETE /api/tipo/:id': 'TipoController.delete',
-  'PUT /api/tipo/:id': 'TipoController.update',
+  'GET /api/companies': 'CompanyController.findAll',
+  'GET /api/company/:id': 'CompanyController.findOne',
 
   //director
-  'POST /api/menu': 'MenuController.create',
-  'GET /api/menus': 'MenuController.findAll',
-  'GET /api/menu/:id': 'MenuController.findOne',
-  'DELETE /api/menu/:id': 'MenuController.delete',
-  'PUT /api/menu/:id': 'MenuController.update',
+  'POST /api/director': 'DirectorController.create',
+  'GET /api/directores': 'DirectorController.findAll',
+  'GET /api/director/:id': 'DirectorController.findOne',
+  'DELETE /api/director/:id': 'DirectorController.delete',
+  'PUT /api/director/:id': 'DirectorController.update',
 
   //pelicula
-  'POST /api/cliente': 'ClienteController.create',
-  'GET /api/clientes': 'ClienteController.findAll',
-  'GET /api/cliente/:id': 'ClienteController.findOne',
-  'DELETE /api/cliente/:id': 'ClienteController.delete',
-  'PUT /api/cliente/:id': 'ClienteController.update',
+  'GET /api/clientes': 'PeliculaController.findAll',
+  'GET /api/cliente/:id': 'PeliculaController.findOne',
 
   //popularidad
-  'POST /api/usuario': 'UsuarioController.create',
-  'GET /api/usuarios': 'UsuarioController.findAll',
-  'GET /api/usuario/:id': 'UsuarioController.findOne',
-  'DELETE /api/usuario/:id': 'UsuarioController.delete',
-  'PUT /api/usuario/:id': 'UsuarioController.update'
+  'GET /api/usuarios': 'PopularidadController.findAll',
+  'GET /api/usuario/:id': 'PopularidadController.findOne'
 };
