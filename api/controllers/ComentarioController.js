@@ -48,7 +48,7 @@ module.exports = {
     }
     Comentario.find()
       .then( (_comentarios) => {
-        if (!_comentarios || _comentarios.length === 0) return res.badRequest({ err: 'No hay Usuarios registradas :(' });
+        if (!_comentarios || _comentarios.length === 0) return res.badRequest({ err: 'No hay Comentarios registradas :(' });
         return res.ok(_comentarios);
       }).catch( (err) => {
       res.serverError(err.message);
