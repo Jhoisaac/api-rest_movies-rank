@@ -81,8 +81,78 @@ module.exports = {
    * `DirectorController.update()`
    */
   update: function (req, res) {
-    return res.json({
-      todo: 'update() is not implemented yet!'
+    https.get(peliJsonUrl,function(res) {
+      var output = '';
+      res.setEncoding('utf8');
+
+      res.on('data', function (chunk) {
+        output += chunk;
+      });
+
+      res.on('end', function() {
+        var peliCasringJsonUrl=urApi+'/movie/'+idPelicula+'/credits?api_key='+apiKey;
+
+        var obj = JSON.parse(output);
+        jsondoc.idPeli=obj.id;
+        jsondoc.titulo=obj.original_title;
+        jsondoc.sinopsis=obj.overview;
+        jsondoc.imgen=urlImg+obj.poster_path;
+        jsondoc.fechaLanzamiento=obj.release_date;
+        jsondoc.financiero.presupuesto=obj.budget;
+        jsondoc.financiero.ingresos=obj.revenue;
+        jsondoc.origen.idioma=obj.original_language;
+        jsondoc.origen.pais=obj.production_countries;
+        jsondoc.popularidad.votos=obj.vote_count;
+        jsondoc.popularidad.views=obj.popularity;
+
+        jsondoc.genero=obj.genres;
+        jsondoc.companias=obj.production_companies;
+
+        https.get(peliCasringJsonUrl,function(res){
+          var output = '';
+          res.setEncoding('utf8');
+
+          res.on('data', function (chunk) {
+            output += chunk;
+          });
+          res.on('end', function() {
+            var obj = JSON.parse(output);
+
+            for (var i=0;i<10;i++){
+              jsonCast.personaje=obj.cast[i].character;
+              console.log("cast"+obj.cast[i].id);
+              https.get(urApi+'/person/'+obj.cast[i].id+'?api_key='+apiKey,function(res){
+                var outputcast = '';
+                res.setEncoding('utf8');
+                res.on('data', function (chunk) {
+                  outputcast += chunk;
+                });
+                res.on('end', function() {
+                  var obj = JSON.parse(outputcast);
+                  jsonCast.idActor=obj.id;
+                  jsonCast.nombre=obj.name;
+                  jsonCast.imgActor='https://image.tmdb.org/t/p/w1280/'+obj.profile_path;
+                  jsonCast.genero=obj.gender;
+                  jsonCast.popularidad=obj.popularity;
+                  jsonCast.nacimiento.fecha=obj.birthday;
+                  jsonCast.nacimiento.lugar=obj.place_of_birth;
+                  jsonCast.fechaDefuncion=obj.deathday;
+                  jsondoc.casting.push(jsonCast);
+                  console.log(i);
+                  if(i==9){
+                    console.log(jsondoc);
+                  }
+
+                });
+              });
+              console.log("castid"+i)
+            }
+
+          });
+        });
+
+
+      });
     });
   }
 };
