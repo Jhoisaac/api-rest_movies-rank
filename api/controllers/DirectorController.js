@@ -45,8 +45,25 @@ module.exports = {
    * `DirectorController.findOne()`
    */
   findOne: function (req, res) {
-    return res.json({
-      todo: 'findOne() is not implemented yet!'
+    // Valida si el request no fue hecho por GET
+    if(req.method !== 'GET') {
+      console.dir(req.method);
+      console.log('Es metodo no permitido!');
+      return res.forbidden('Metodo no permitido!');
+    }
+    // Obtiene el id enviado en el request
+    let directorId = req.params.id;
+    // Verifica que los valores recibidos no esten vacios
+    if (!directorId) return res.badRequest({ err: 'Director id esta ausente' });
+
+    Director.findOne({
+      id: directorId
+    })  //.populate('pedidos')
+      .then( (_director) => {
+        if (!_director || _director.length === 0) return res.badRequest({ err: 'Ningún Director encontrado :(' });
+        return res.ok(_director);
+      }).catch( (err) => {
+      res.serverError(err.message);
     });
   },
 

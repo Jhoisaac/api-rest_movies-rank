@@ -51,13 +51,18 @@ module.exports = {
       console.log('Es metodo no permitido!');
       return res.forbidden('Metodo no permitido!');
     }
-    Actor.find()
-      .then(function(_actores) {
-        console.log('Consultado actores');
-        console.dir(_actores);
-        if (!_actores || _actores.length === 0) return res.badRequest({ err: 'Ningún producto encontrado :(' });
-        return res.ok(_actores);
-      }).catch(function(err) {
+    // Obtiene el id enviado en el request
+    let actorId = req.params.id;
+    // Verifica que los valores recibidos no esten vacios
+    if (!actorId) return res.badRequest({ err: 'Actor id esta ausente' });
+
+    Actor.findOne({
+      id: actorId
+    })  //.populate('pedidos')
+      .then( (_actor) => {
+        if (!_actor || _actor.length === 0) return res.badRequest({ err: 'Ningún Actor encontrado :(' });
+        return res.ok(_actor);
+      }).catch( (err) => {
       res.serverError(err.message);
     });
   },
