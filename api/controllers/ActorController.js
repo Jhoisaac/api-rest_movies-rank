@@ -51,17 +51,12 @@ module.exports = {
       console.log('Es metodo no permitido!');
       return res.forbidden('Metodo no permitido!');
     }
-    // Obtiene el id enviado en el request
-    let productoId = req.params.id;
-    // Verifica que los valores recibidos no esten vacios
-    if (!productoId) return res.badRequest({ err: 'Producto id esta ausente' });
-
-    Producto.findOne({
-      id: productoId
-    }).populate('categoria')
-      .then(function(_producto) {
-        if (!_producto || _producto.length === 0) return res.badRequest({ err: 'Ningún producto encontrado :(' });
-        return res.ok(_producto);
+    Actor.find()
+      .then(function(_actores) {
+        console.log('Consultado actores');
+        console.dir(_actores);
+        if (!_actores || _actores.length === 0) return res.badRequest({ err: 'Ningún producto encontrado :(' });
+        return res.ok(_actores);
       }).catch(function(err) {
       res.serverError(err.message);
     });
