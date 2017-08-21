@@ -78,10 +78,10 @@ module.exports = {
       return res.forbidden('Metodo no permitido!');
     }
     // Obtiene el id enviado en el request
+    console.log('Endpoint query param');
     let peliculaId = req.params.id;
     let queryString = req.query.q;
     console.log(queryString);
-    return;
     // Verifica que los valores recibidos no esten vacios
     if (!peliculaId) return res.badRequest({ err: 'Pelicula id esta ausente' });
 
