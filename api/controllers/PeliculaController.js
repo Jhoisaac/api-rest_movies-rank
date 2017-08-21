@@ -33,7 +33,7 @@ module.exports = {
     let limit = req.query.limit;
     let skip = req.query.skip;
 
-    Pelicula.find({ limit: limit, skip: skip }).sort('idPeli DESC')
+    Pelicula.find({ limit: limit, skip: skip }).sort('idPeli ASC')
       .then( (_peliculas) => {
         console.log('Consultado peliculas');
         if (!_peliculas || _peliculas.length === 0) return res.badRequest({ err: 'No hay peliculas registradas :(' });
