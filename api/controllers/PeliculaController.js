@@ -66,6 +66,8 @@ module.exports = {
         }).catch( (err) => {
         res.serverError(err.message);
       });
+
+      return;
     }
 
     console.log(queryString);
