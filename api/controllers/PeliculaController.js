@@ -52,8 +52,22 @@ module.exports = {
       return res.forbidden('Metodo no permitido!');
     }
     console.log('Endpoint query param findOne');
+    //Query Params
     let queryString = req.query.q;
-    console.log('Luego de Endpoint query param findOne');
+
+    //Query Params
+    if(queryString) {
+      Pelicula.findOne({
+        sort: 'fechaLanzamiento ASC'
+      })  //.populate('pedidos')
+        .then( (_pelicula) => {
+          if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+          return res.ok(_pelicula);
+        }).catch( (err) => {
+        res.serverError(err.message);
+      });
+    }
+
     console.log(queryString);
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
@@ -84,11 +98,10 @@ module.exports = {
     }
     // Obtiene el id enviado en el request
     console.log('Endpoint query param findMasReciente');
-    let peliculaId = req.params.id;
     let queryString = req.query.q;
     console.log(queryString);
     // Verifica que los valores recibidos no esten vacios
-    if (!peliculaId) return res.badRequest({ err: 'Pelicula id esta ausente' });
+    if (!queryString) return res.badRequest({ err: 'Query esta ausente' });
 
     Pelicula.findOne({
       sort: 'fechaLanzamiento ASC'
