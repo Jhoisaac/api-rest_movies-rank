@@ -118,6 +118,29 @@ module.exports = {
       });
 
       return;
+
+    } else if(queryString === 'peliculasxidiomas') {
+      let presupuesto = req.query.presupuesto;
+      let ingresos = req.query.ingresos;
+
+      Pelicula.count({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
+        .then( (_peliculaen) => {
+          if (!_peliculaen || _peliculaen.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+          return _peliculaen;
+        }).then( (_peliculaen) => {
+          Pelicula.count({origen: {idioma: 'es'}}).sort('origen[idioma] ASC')
+            .then( (_peliculaes) => {
+              if (!_peliculaes || _peliculaes.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+              return res.json({
+                peliesp: _peliculaen,
+                pelieng: _peliculaes})
+              });
+
+        }).catch( (err) => {
+        res.serverError(err.message);
+      });
+
+      return;
     }
 
     console.log(queryString);
