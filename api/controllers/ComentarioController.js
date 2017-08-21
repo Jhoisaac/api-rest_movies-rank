@@ -20,12 +20,23 @@ module.exports = {
     // Verifica que los valores recibidos no esten vacios
     if(!parametros.usuario) return res.badRequest({err: 'usuario invalido!'});
     if(!parametros.contenido) return res.badRequest({err: 'contenido invalido!'});
+    if(!parametros.pelicula) return res.badRequest({err: 'pelicula invalido!'});
     // Ejecuta el model method para crear el objeto cliente y guardarlo en la base
-    Comentario.create({
-      usuario: parametros.usuario,
-      contenido: parametros.contenido,
+    Pelicula.find({
+      id: parametros.pelicula
+    }).then( (_pelicula) => {
+      console.dir(_pelicula);
+      if(!_pelicula) return res.serverError({err:'No existe esa categoria :('});
+      return _pelicula;
+
+    }).then( (_pelicula) => {
+      return Comentario.create({
+        usuario: parametros.usuario,
+        contenido: parametros.contenido,
+        pelicula: _pelicula.id,
+      });
     }).then( (_comentario) => {
-      if(!_comentario) return res.serverError({err:'Incapas de crear al usuario! :('});
+      if(!_comentario) return res.serverError({err:'Incapas de crear el comentario! :('});
       console.log('Se creo el comentario: ', _comentario);
       // NOTE: payload is { id: user.id}
       res.json( 201, { comentario: _comentario } );
