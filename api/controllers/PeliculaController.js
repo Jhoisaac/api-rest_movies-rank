@@ -44,8 +44,25 @@ module.exports = {
    * `PeliculaController.findOne()`
    */
   findOne: function (req, res) {
-    return res.json({
-      todo: 'findOne() is not implemented yet!'
+    // Valida si el request no fue hecho por GET
+    if(req.method !== 'GET') {
+      console.dir(req.method);
+      console.log('Es metodo no permitido!');
+      return res.forbidden('Metodo no permitido!');
+    }
+    // Obtiene el id enviado en el request
+    let peliculaId = req.params.id;
+    // Verifica que los valores recibidos no esten vacios
+    if (!peliculaId) return res.badRequest({ err: 'Pelicula id esta ausente' });
+
+    Pelicula.findOne({
+      id: peliculaId
+    })  //.populate('pedidos')
+      .then( (_pelicula) => {
+        if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+        return res.ok(_pelicula);
+      }).catch( (err) => {
+      res.serverError(err.message);
     });
   },
 
