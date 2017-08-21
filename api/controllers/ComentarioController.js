@@ -34,7 +34,7 @@ module.exports = {
       return Comentario.create({
         usuario: parametros.usuario,
         contenido: parametros.contenido,
-        pelicula: _pelicula.id,
+        pelicula: _pelicula[0].id,
       });
     }).then( (_comentario) => {
       if(!_comentario) return res.serverError({err:'Incapas de crear el comentario! :('});
