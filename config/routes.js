@@ -74,6 +74,7 @@ module.exports.routes = {
   //pelicula
   'GET /api/peliculas': 'PeliculaController.findAll',
   'GET /api/pelicula/:id': 'PeliculaController.findOne',
+  'GET /api/pelicula/:latest': 'PeliculaController.findMasReciente',
 
   //popularidad
   'GET /api/popularidades': 'PopularidadController.findAll',
