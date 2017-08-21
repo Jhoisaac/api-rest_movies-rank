@@ -76,7 +76,7 @@ module.exports = {
 
     } else if(queryString === 'masvisitadas') {
       Pelicula.find()
-        .sort('popularidad[votos] DESC').limit(limite)  //.populate('pedidos')
+        .sort('popularidad[votos] DESC').limit(limite)
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);

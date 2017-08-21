@@ -19,6 +19,12 @@ module.exports = {
       type: "text",
       required: true,
       unique: true
+    },
+    // Many to One
+    pelicula: {
+      model: "pelicula",
+      columnName: "pelicula_id",
+      required: true
     }
   }
 };

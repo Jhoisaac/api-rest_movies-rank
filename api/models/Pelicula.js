@@ -49,6 +49,11 @@ module.exports = {
     casting: {
       type: "array",
     },
+    // One to Many
+    comentarios: {
+      collection: "comentario",
+      via: "pelicula"
+    }
   }
 };
 
