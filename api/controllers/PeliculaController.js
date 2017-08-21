@@ -120,11 +120,11 @@ module.exports = {
       return;
 
     } else if(queryString === 'peliculasxidiomas') {
-
+      console.log('en peliculasxidiomas... antes de retornar');
       Pelicula.count({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
         .then( (_peliculaen) => {
           if (!_peliculaen || _peliculaen.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
-          return _peliculaen;
+          //return _peliculaen;
         }).then( (_peliculaen) => {
           Pelicula.count({origen: {idioma: 'es'}}).sort('origen[idioma] ASC')
             .then( (_peliculaes) => {
