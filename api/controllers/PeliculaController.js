@@ -121,20 +121,10 @@ module.exports = {
 
     } else if(queryString === 'peliculasxidiomas') {
       console.log('en peliculasxidiomas... antes de retornar');
-      Pelicula.count({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
+      Pelicula.count({origen: {idioma: 'en'}}, {origen: {idioma: 'es'}}).sort('origen[idioma] ASC')
         .then( (_peliculaen) => {
           if (!_peliculaen || _peliculaen.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
-          //return _peliculaen;
-        }).then( (_peliculaen) => {
-          Pelicula.count({origen: {idioma: 'es'}}).sort('origen[idioma] ASC')
-            .then( (_peliculaes) => {
-              if (!_peliculaes || _peliculaes.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
-              console.log('en peliculasxidiomas... retornando');
-              return res.json({
-                peliesp: _peliculaen,
-                pelieng: _peliculaes})
-              });
-
+          return res.ok(_peliculaen);
         }).catch( (err) => {
         res.serverError(err.message);
       });
