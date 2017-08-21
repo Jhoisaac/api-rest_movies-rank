@@ -55,6 +55,7 @@ module.exports = {
     //Query Params
     let queryString = req.query.q;
     let limite = req.query.limite;
+    console.dir(req.query);
 
     //Query Params
     if(queryString === 'masrecientes') {
