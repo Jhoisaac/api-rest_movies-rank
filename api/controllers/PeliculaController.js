@@ -121,7 +121,7 @@ module.exports = {
 
     } else if(queryString === 'peliculasxidiomas') {
       console.log('en peliculasxidiomas... antes de retornar');
-      Pelicula.find({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
+      Pelicula.findOne({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
         .then( (_peliculaen) => {
           if (!_peliculaen || _peliculaen.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_peliculaen);
