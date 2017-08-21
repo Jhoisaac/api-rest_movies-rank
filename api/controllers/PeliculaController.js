@@ -55,6 +55,7 @@ module.exports = {
     //Query Params
     let queryString = req.query.q;
     let limite = req.query.limite;
+    if (!limite) limite = 20;
     console.dir(req.query);
 
     //Query Params
