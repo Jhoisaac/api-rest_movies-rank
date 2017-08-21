@@ -29,6 +29,7 @@ module.exports = {
       console.log('Es metodo no permitido!');
       return res.forbidden('Metodo no permitido!');
     }
+    console.log('Endpoint query param findAll');
     Pelicula.find()
       .then( (_peliculas) => {
         console.log('Consultado peliculas');
@@ -50,6 +51,7 @@ module.exports = {
       console.log('Es metodo no permitido!');
       return res.forbidden('Metodo no permitido!');
     }
+    console.log('Endpoint query param findOne');
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
     // Verifica que los valores recibidos no esten vacios
@@ -78,7 +80,7 @@ module.exports = {
       return res.forbidden('Metodo no permitido!');
     }
     // Obtiene el id enviado en el request
-    console.log('Endpoint query param');
+    console.log('Endpoint query param findMasReciente');
     let peliculaId = req.params.id;
     let queryString = req.query.q;
     console.log(queryString);
@@ -107,6 +109,7 @@ module.exports = {
       console.log('Es metodo no permitido!');
       return res.forbidden('Metodo no permitido!');
     }
+    console.log('Endpoint query param findPresupuestoXPopularidad');
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
     // Verifica que los valores recibidos no esten vacios
