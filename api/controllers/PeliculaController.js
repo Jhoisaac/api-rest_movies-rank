@@ -30,7 +30,10 @@ module.exports = {
       return res.forbidden('Metodo no permitido!');
     }
     console.log('Endpoint query param findAll');
-    Pelicula.find({ limit: 10, skip: 10 })
+    let limit = req.query.limit;
+    let skip = req.query.skip;
+
+    Pelicula.find({ limit: limit, skip: skip })
       .then( (_peliculas) => {
         console.log('Consultado peliculas');
         if (!_peliculas || _peliculas.length === 0) return res.badRequest({ err: 'No hay peliculas registradas :(' });
