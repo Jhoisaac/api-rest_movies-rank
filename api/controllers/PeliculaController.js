@@ -33,7 +33,7 @@ module.exports = {
     let limit = req.query.limit;
     let skip = req.query.skip;
 
-    Pelicula.find({ limit: limit, skip: skip }).sort('idPeli ASC')
+    Pelicula.find({ limit: limit, skip: skip }).sort('idPeli ASC').populate('comentarios')
       .then( (_peliculas) => {
         console.log('Consultado peliculas');
         if (!_peliculas || _peliculas.length === 0) return res.badRequest({ err: 'No hay peliculas registradas :(' });
@@ -63,7 +63,7 @@ module.exports = {
 
     //Query Params
     if(queryString === 'masrecientes') {
-      Pelicula.find()
+      Pelicula.find().populate('comentarios')
         .sort('fechaLanzamiento DESC').limit(limite)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
@@ -75,7 +75,7 @@ module.exports = {
       return;
 
     } else if(queryString === 'masvisitadas') {
-      Pelicula.find()
+      Pelicula.find().populate('comentarios')
         .sort('popularidad[votos] DESC').limit(limite)
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
@@ -87,7 +87,7 @@ module.exports = {
       return;
 
     } else if(queryString === 'mayorpresupuesto') {
-      Pelicula.find()
+      Pelicula.find().populate('comentarios')
         .sort('financiero[presupuesto] DESC').limit(limite)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
@@ -109,7 +109,8 @@ module.exports = {
         financiero: {
           ingresos: ingresos
         },
-      }).sort('financiero[presupuesto] DESC')
+      }).populate('comentarios')
+        .sort('financiero[presupuesto] DESC')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);
@@ -121,7 +122,7 @@ module.exports = {
 
     } else if(queryString === 'peliculasxidiomas') {
       console.log('en peliculasxidiomas... antes de retornar');
-      Pelicula.findOne({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
+      Pelicula.findOne({origen: {idioma: 'en'}}).sort('origen[idioma] ASC').populate('comentarios')
         .then( (_peliculaen) => {
           if (!_peliculaen || _peliculaen.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_peliculaen);
@@ -140,7 +141,7 @@ module.exports = {
 
     Pelicula.findOne({
       id: peliculaId
-    })  //.populate('pedidos')
+    }).populate('comentarios')
       .then( (_pelicula) => {
         if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
         return res.ok(_pelicula);
@@ -169,7 +170,7 @@ module.exports = {
 
     Pelicula.findOne({
       sort: 'fechaLanzamiento ASC'
-    })  //.populate('pedidos')
+    }).populate('comentarios')
       .then( (_pelicula) => {
         if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
         return res.ok(_pelicula);
@@ -201,7 +202,7 @@ module.exports = {
       },
       popularidad: peliculaId,
       sort: 'popularidad ASC'
-    })  //.populate('pedidos')
+    }).populate('comentarios')
       .then( (_pelicula) => {
         if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
         return res.ok(_pelicula);
