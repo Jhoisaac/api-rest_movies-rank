@@ -71,9 +71,29 @@ module.exports = {
    * `DirectorController.delete()`
    */
   delete: function (req, res) {
-    return res.json({
-      todo: 'delete() is not implemented yet!'
-    });
+    var jsondoc={
+      idPeli:0,
+      titulo:"",
+      sinopsis:"",
+      imgen:"",
+      fechaLanzamiento:"",
+      financiero:{
+        presupuesto:0,
+        ingresos:0
+      },
+      origen:{
+        idioma:"",
+        pais:[]
+      },
+      popularidad:{
+        votos:0,
+        views:0,
+        reviews:0,
+      },
+      genero:[],
+      companias:[],
+      casting:[]
+    };
   },
 
 
