@@ -141,6 +141,7 @@ module.exports = {
     // Obtiene los nuevos atributos a actualizar
     if(parametros.usuario) comentario.usuario = parametros.usuario;
     if(!parametros.contenido) comentario.contenido = parametros.contenido;
+    if(parametros.pelicula) comentario.pelicula = parametros.pelicula;
     // Ejecuta el model method para crear el objeto cliente y guardarlo en la base
     Comentario.update(
       { id: req.params.id },
