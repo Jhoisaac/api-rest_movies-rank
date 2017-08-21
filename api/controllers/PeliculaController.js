@@ -56,8 +56,19 @@ module.exports = {
     let queryString = req.query.q;
 
     //Query Params
-    if(queryString) {
+    if(queryString === 'masreciente') {
       Pelicula.find().sort('fechaLanzamiento DESC').limit(1)  //.populate('pedidos')
+        .then( (_pelicula) => {
+          if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+          return res.ok(_pelicula);
+        }).catch( (err) => {
+        res.serverError(err.message);
+      });
+
+      return;
+
+    } else if(queryString === 'masvisitadas') {
+      Pelicula.find().sort('popularidad[0] DESC').limit(10)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);
