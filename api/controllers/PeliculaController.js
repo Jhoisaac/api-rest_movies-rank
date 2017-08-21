@@ -54,10 +54,11 @@ module.exports = {
     console.log('Endpoint query param findOne');
     //Query Params
     let queryString = req.query.q;
+    let limite = req.query.limite;
 
     //Query Params
-    if(queryString === 'masreciente') {
-      Pelicula.find().sort('fechaLanzamiento DESC').limit(1)  //.populate('pedidos')
+    if(queryString === 'masrecientes') {
+      Pelicula.find().sort('fechaLanzamiento DESC').limit(limite)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);
@@ -68,7 +69,18 @@ module.exports = {
       return;
 
     } else if(queryString === 'masvisitadas') {
-      Pelicula.find().sort('popularidad[votos] DESC').limit(10)  //.populate('pedidos')
+      Pelicula.find().sort('popularidad[votos] DESC').limit(limite)  //.populate('pedidos')
+        .then( (_pelicula) => {
+          if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
+          return res.ok(_pelicula);
+        }).catch( (err) => {
+        res.serverError(err.message);
+      });
+
+      return;
+
+    } else if(queryString === 'mayorpresupuesto') {
+      Pelicula.find().sort('financiero[presupuesto] DESC').limit(limite)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);
