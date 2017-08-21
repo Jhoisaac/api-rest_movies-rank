@@ -57,7 +57,7 @@ module.exports = {
 
     //Query Params
     if(queryString) {
-      Pelicula.find().sort('fechaLanzamiento DESC')  //.populate('pedidos')
+      Pelicula.find().sort('fechaLanzamiento DESC').limit(1)  //.populate('pedidos')
         .then( (_pelicula) => {
           if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
           return res.ok(_pelicula);
