@@ -120,8 +120,7 @@ module.exports = {
       return;
 
     } else if(queryString === 'peliculasxidiomas') {
-      let presupuesto = req.query.presupuesto;
-      let ingresos = req.query.ingresos;
+      console.log('en peliculasxidiomas');
 
       Pelicula.count({origen: {idioma: 'en'}}).sort('origen[idioma] ASC')
         .then( (_peliculaen) => {
