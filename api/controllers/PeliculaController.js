@@ -52,6 +52,8 @@ module.exports = {
       return res.forbidden('Metodo no permitido!');
     }
     console.log('Endpoint query param findOne');
+    let queryString = req.query.q;
+    console.log(queryString);
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
     // Verifica que los valores recibidos no esten vacios
