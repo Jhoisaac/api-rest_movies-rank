@@ -53,6 +53,7 @@ module.exports = {
     }
     console.log('Endpoint query param findOne');
     let queryString = req.query.q;
+    console.log('Luego de Endpoint query param findOne');
     console.log(queryString);
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
