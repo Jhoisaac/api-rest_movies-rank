@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-	
+
 
 
   /**
@@ -22,9 +22,20 @@ module.exports = {
   /**
    * `PeliculaController.findALL()`
    */
-  findALL: function (req, res) {
-    return res.json({
-      todo: 'findALL() is not implemented yet!'
+  findAll: function (req, res) {
+    // Valida si el request no fue hecho por GET
+    if(req.method !== 'GET') {
+      console.dir(req.method);
+      console.log('Es metodo no permitido!');
+      return res.forbidden('Metodo no permitido!');
+    }
+    Pelicula.find()
+      .then( (_peliculas) => {
+        console.log('Consultado peliculas');
+        if (!_peliculas || _peliculas.length === 0) return res.badRequest({ err: 'No hay peliculas registradas :(' });
+        return res.ok(_peliculas);
+      }).catch( (err) => {
+      res.serverError(err.message);
     });
   },
 
