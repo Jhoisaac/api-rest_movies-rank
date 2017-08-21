@@ -85,7 +85,7 @@ module.exports = {
 
     Comentario.findOne({
       id: comentarioId
-    }).populate('peliculas')
+    }).populate('pelicula')
       .then( (_comentario) => {
         if (!_comentario || _comentario.length === 0) return res.badRequest({ err: 'Ningún Comentario encontrado :(' });
         return res.ok(_comentario);
