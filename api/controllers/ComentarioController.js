@@ -21,6 +21,7 @@ module.exports = {
     if(!parametros.usuario) return res.badRequest({err: 'usuario invalido!'});
     if(!parametros.contenido) return res.badRequest({err: 'contenido invalido!'});
     if(!parametros.pelicula) return res.badRequest({err: 'pelicula invalido!'});
+    console.dir(parametros);
     // Ejecuta el model method para crear el objeto cliente y guardarlo en la base
     Pelicula.find({
       id: parametros.pelicula
