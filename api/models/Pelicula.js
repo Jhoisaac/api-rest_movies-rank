@@ -32,22 +32,22 @@ module.exports = {
       required: true
     },
     financiero: {
-      collection: 'financieros'
+      type: "array",
     },
     origen: {
-      collection: 'origenes'
+      type: "array",
     },
     popularidad: {
-      collection: 'populares'
+      type: "array",
     },
     genero: {
-      collection: 'Financieros'
+      type: "array",
     },
     compania: {
-      collection: 'companias'
+      type: "array",
     },
     casting: {
-      collection: 'castings'
+      type: "array",
     },
   }
 };
