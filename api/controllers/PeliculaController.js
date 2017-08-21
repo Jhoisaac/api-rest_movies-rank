@@ -56,7 +56,7 @@ module.exports = {
     if (!peliculaId) return res.badRequest({ err: 'Pelicula id esta ausente' });
 
     Pelicula.findOne({
-      idPeli: peliculaId
+      id: peliculaId
     })  //.populate('pedidos')
       .then( (_pelicula) => {
         if (!_pelicula || _pelicula.length === 0) return res.badRequest({ err: 'Ningúna Pelicula encontrado :(' });
