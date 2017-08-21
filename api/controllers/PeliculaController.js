@@ -79,6 +79,9 @@ module.exports = {
     }
     // Obtiene el id enviado en el request
     let peliculaId = req.params.id;
+    let queryString = req.query.q;
+    console.log(queryString);
+    return;
     // Verifica que los valores recibidos no esten vacios
     if (!peliculaId) return res.badRequest({ err: 'Pelicula id esta ausente' });
 
